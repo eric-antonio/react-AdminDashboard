@@ -1,4 +1,4 @@
-import { DealsChart, UpcomingEvents } from "@/Components/home";
+import { DealsChart, UpcomingEvents } from "@/Components";
 import { Col, Row } from "antd";
 import React from "react";
 
