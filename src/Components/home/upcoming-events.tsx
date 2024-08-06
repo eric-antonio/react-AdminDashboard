@@ -1,10 +1,38 @@
 import { CalendarOutlined } from "@ant-design/icons";
-import { Card, List } from "antd";
+import { Badge, Card, List } from "antd";
 import React, { useState } from "react";
 import { Text } from "../text";
+import UpcomingEventsSkeleton from "../skeleton/upcoming-events";
+import { getDate } from "@/utilities/helpers";
+import { useList } from "@refinedev/core";
+import { DASHBORAD_CALENDAR_UPCOMING_EVENTS_QUERY } from "@/graphql/queries";
+import dayjs from "dayjs";
 
 const UpcomingEvents = () => {
-  const [isLoading, setIsLoading] = useState(true);
+
+  const { data, isLoading } = useList({
+    resource: "events",
+    pagination: {
+      pageSize: 5,
+    },
+    sorters: [
+      {
+        field: "startDate",
+        order: "asc",
+      },
+    ],
+    filters: [
+      {
+        field: "startDate",
+        operator: "gte",
+        value: dayjs().format("YYY-MM-DD"),
+      },
+    ],
+    meta: {
+      gqlQuery: DASHBORAD_CALENDAR_UPCOMING_EVENTS_QUERY,
+    },
+  });
+
   return (
     <Card
       style={{ height: "100%" }}
@@ -28,9 +56,41 @@ const UpcomingEvents = () => {
           dataSource={Array.from({ length: 5 }).map((_, index) => ({
             id: index,
           }))}
+          renderItem={() => <UpcomingEventsSkeleton />}
         ></List>
       ) : (
-        <List></List>
+        <List
+          itemLayout="horizontal"
+          dataSource={data?.data || []}
+          renderItem={(item) => {
+            const rederDate = getDate(item.startDate, item.endDate);
+            return (
+              <List.Item>
+                <List.Item.Meta
+                  avatar={<Badge color={item.color} />}
+                  title={<Text size="xs">{rederDate}</Text>}
+                  description={
+                    <Text ellipsis={{ tooltip: true }}>
+                      <strong>{item.title}</strong>
+                    </Text>
+                  }
+                />
+              </List.Item>
+            );
+          }}
+        />
+      )}
+      {!isLoading && data?.length === 0 && (
+        <span
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "220px",
+          }}
+        >
+          No Upcoming Events
+        </span>
       )}
     </Card>
   );
