@@ -1,11 +1,17 @@
 import { Authenticated, GitHubBanner, Refine } from "@refinedev/core";
 import { DevtoolsPanel, DevtoolsProvider } from "@refinedev/devtools";
 import { RefineKbar, RefineKbarProvider } from "@refinedev/kbar";
+
 import {
+  ErrorComponent,
+  ThemedLayoutV2,
+  ThemedSiderV2,
   useNotificationProvider,
 } from "@refinedev/antd";
 import "@refinedev/antd/dist/reset.css";
+
 import{ dataProvider , liveProvider } from "./providers/data";
+
 import routerBindings, {
   CatchAllNavigate,
   DocumentTitleHandler,
@@ -13,9 +19,10 @@ import routerBindings, {
   UnsavedChangesNotifier,
 } from "@refinedev/react-router-v6";
 import { App as AntdApp } from "antd";
+import { createClient } from "graphql-ws";
 import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
 import { authProvider } from "./providers";
-import {Home} from "./pages";
+import {Home, ForgotPassword, Login, Register} from "./pages";
 
 
 function App() {
@@ -62,7 +69,7 @@ function App() {
                 }}
               >
                 <Routes>
-                  <Rourte index element={<Home/>}/>
+                  <Route index element={<Home/>}/>
                 </Routes>
 
                 <RefineKbar />
