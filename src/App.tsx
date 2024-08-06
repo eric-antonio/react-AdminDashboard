@@ -18,11 +18,12 @@ import routerBindings, {
   NavigateToResource,
   UnsavedChangesNotifier,
 } from "@refinedev/react-router-v6";
-import { App as AntdApp } from "antd";
+import { App as AntdApp, Layout } from "antd";
 import { createClient } from "graphql-ws";
 import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
 import { authProvider } from "./providers";
 import { Home, ForgotPassword, Login, Register } from "./pages";
+import LayoutProvider from "./Components/layout";
 
 function App() {
   return (
@@ -46,10 +47,23 @@ function App() {
               }}
             >
               <Routes>
-                <Route index element={<Home />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/forgot-password" element={<ForgotPassword />} />
+                <Route
+                  element={
+                    <Authenticated
+                      key="authenticated-layout"
+                      fallback={<CatchAllNavigate to="/login" />}
+                    >
+                      <LayoutProvider>
+                        <Outlet />
+                      </LayoutProvider>
+                    </Authenticated>
+                  }
+                >
+                  <Route index element={<Home />} />
+                </Route>
               </Routes>
 
               <RefineKbar />
