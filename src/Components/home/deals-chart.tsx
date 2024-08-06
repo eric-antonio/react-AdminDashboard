@@ -7,6 +7,7 @@ import { Area, AreaConfig } from "@ant-design/plots";
 
 const DealsChart = () => {
 
+  // const {data } = uselistDealsQuery({})
   const config: AreaConfig ={
     data:[]
   }
