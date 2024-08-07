@@ -87,13 +87,19 @@ const DashBoardLatestActivities = () => {
                   description={
                     <Space size={4}>
                       <Text>{item.user?.name}</Text>
+                      <Text size="sm" className="secondary">
+                        {deal?.company?.name}
+                      </Text>
+                      <Text>
+                        {item.action === "CREATE" ? "created" : "moved"}
+                      </Text>
+                      <Text strong> {deal?.title}</Text>
+                      <Text>deal</Text>
+                      <Text>{item.action === "CREATE " ? "in" : "to"}</Text>
+                      <Text strong>{deal?.stage?.title}</Text>
                     </Space>
                   }
                 />
-                <Text size="sm" className="secondary">
-                  {deal?.company?.name}
-                </Text>
-                <Text>{item.action === "CREATE" ? "created" : "moved"}</Text>
               </List.Item>
             );
           }}
