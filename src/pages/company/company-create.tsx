@@ -6,6 +6,7 @@ import { useGo } from "@refinedev/core";
 import { useSelect } from "@refinedev/antd";
 import { CREATE_COMPANY_MUTATION } from "@/graphql/mutations";
 import { USERS_SELECT_QUERY } from "@/graphql/queries";
+import SelectOptionWithAvatar from "@/Components/select-option-withAvatar";
 
 export const Create = () => {
   const go = useGo();
@@ -17,7 +18,7 @@ export const Create = () => {
     });
   };
 
-  const { selectProps, queryResults } = useSelect({
+  const { selectProps, queryResult } = useSelect({
     resource: "users",
     optionLabel: "name",
     meta: {
@@ -25,7 +26,7 @@ export const Create = () => {
     },
   });
 
-  const { fromProps, modalProps } = useModalForm({
+  const { formProps, modalProps } = useModalForm({
     action: "create",
     defaultVisible: true,
     resource: "companies",
@@ -40,7 +41,7 @@ export const Create = () => {
   return (
     <CompanyList>
       <Modal {...modalProps} mask={true} title="Create Company" width={512}>
-        <Form {...fromProps} layout="vertical">
+        <Form {...formProps} layout="vertical">
           <Form.Item
             label="Company Name"
             name="name"
@@ -53,7 +54,10 @@ export const Create = () => {
             name="SalesOwnerId"
             rules={[{ required: true }]}
           >
-            <Select placeholder="Please select a sales owner" {...selectProps} />
+            <Select placeholder="Please select a sales owner" {...selectProps} options={queryResult.data?.data.map((user)=>({
+                values:user.id,
+                label:(<SelectOptionWithAvatar name={user.name} avatarUrl={user.avatarUrl ?? undefined} shape={"circle"}/>)
+            }))} />
           </Form.Item>
         </Form>
       </Modal>
