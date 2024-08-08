@@ -17,7 +17,7 @@ export const Create = () => {
     });
   };
 
-  const { slectProps, queryResults } = useSelect({
+  const { selectProps, queryResults } = useSelect({
     resource: "users",
     optionLabel: "name",
     meta: {
@@ -53,7 +53,7 @@ export const Create = () => {
             name="SalesOwnerId"
             rules={[{ required: true }]}
           >
-            <Select placeholder="Sales Owner" {...slectProps} />
+            <Select placeholder="Please select a sales owner" {...selectProps} />
           </Form.Item>
         </Form>
       </Modal>
