@@ -1,30 +1,28 @@
 import { Authenticated, GitHubBanner, Refine } from "@refinedev/core";
 import { DevtoolsPanel, DevtoolsProvider } from "@refinedev/devtools";
 import { RefineKbar, RefineKbarProvider } from "@refinedev/kbar";
-
-import {
-  ErrorComponent,
-  ThemedLayoutV2,
-  ThemedSiderV2,
-  useNotificationProvider,
-} from "@refinedev/antd";
+import { useNotificationProvider } from "@refinedev/antd";
 import "@refinedev/antd/dist/reset.css";
-
 import { dataProvider, liveProvider } from "./providers/data";
-
 import routerBindings, {
   CatchAllNavigate,
   DocumentTitleHandler,
-  NavigateToResource,
   UnsavedChangesNotifier,
 } from "@refinedev/react-router-v6";
-import { App as AntdApp, Layout } from "antd";
-import { createClient } from "graphql-ws";
+import { App as AntdApp } from "antd";
 import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
 import { authProvider } from "./providers";
-import { Home, ForgotPassword, Login, Register , CompanyList, Create} from "./pages";
+import {
+  Home,
+  ForgotPassword,
+  Login,
+  Register,
+  CompanyList,
+  Create,
+} from "./pages";
 import LayoutProvider from "./Components/layout";
 import { resources } from "./config/recources";
+import EditCompany from "./pages/company/company-edit";
 
 function App() {
   return (
@@ -68,7 +66,7 @@ function App() {
                   <Route path="/companies">
                     <Route index element={<CompanyList />} />
                     <Route path="new" element={<Create />} />
-
+                    <Route path="edit/:id" element={<EditCompany />} />
                   </Route>
                 </Route>
               </Routes>
