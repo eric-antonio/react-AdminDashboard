@@ -49,18 +49,18 @@ export const Create = () => {
             name="name"
             rules={[{ required: true }]}
           >
-            <Input placeholder="Please entre a Company Name" />
+            <Input placeholder="Please enter a Company Name" />
           </Form.Item>
           <Form.Item
             label="Sales Owner"
-            name="SalesOwnerId"
+            name="salesOwnerId" // Corrected field name
             rules={[{ required: true }]}
           >
             <Select
               placeholder="Please select a sales owner"
               {...selectProps}
               options={queryResult.data?.data.map((user) => ({
-                values: user.id,
+                value: user.id, // Ensure this matches the expected ID type
                 label: (
                   <SelectOptionWithAvatar
                     name={user.name}
@@ -68,9 +68,7 @@ export const Create = () => {
                     shape={"circle"}
                   />
                 ),
-              })) ?? []
-            
-            }
+              })) ?? []}
             />
           </Form.Item>
         </Form>
