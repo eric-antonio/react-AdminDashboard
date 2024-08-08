@@ -17,7 +17,7 @@ import { getDefaultFilter, useGo } from "@refinedev/core";
 import { Table, Input, Space } from "antd";
 import Search from "antd/es/transfer/search";
 
-export const CompanyList = () => {
+export const CompanyList = ({children}:React.PropsWithChildren) => {
   const go = useGo();
   const { tableProps, filters } = useTable({
     resource: "companies",
@@ -56,6 +56,7 @@ export const CompanyList = () => {
   });
 
   return (
+    <>
     <List
       breadcrumb={false}
       headerButtons={() => (
@@ -127,6 +128,9 @@ export const CompanyList = () => {
           )}
         />
       </Table>
+      
     </List>
+    {children}
+    </>
   );
 };
