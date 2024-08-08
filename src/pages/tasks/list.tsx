@@ -12,14 +12,12 @@ const TaskList = () => {
       <KanbanBoardContainer>
         <KanbanBoard>
           <KanbanColum>
-            <KanbanItem />
+            <KanbanItem>
+                this is my 
+            </KanbanItem>
           </KanbanColum>
-          <KanbanColum>
-            <KanbanItem />
-          </KanbanColum>
-          <KanbanColum>
-            <KanbanItem />
-          </KanbanColum>
+         
+      
         </KanbanBoard>
       </KanbanBoardContainer>
     </>
