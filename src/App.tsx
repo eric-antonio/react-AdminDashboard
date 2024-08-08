@@ -23,6 +23,7 @@ import {
 import LayoutProvider from "./Components/layout";
 import { resources } from "./config/recources";
 import EditCompany from "./pages/company/company-edit";
+import TaskList from "./pages/tasks/list";
 
 function App() {
   return (
@@ -67,6 +68,10 @@ function App() {
                     <Route index element={<CompanyList />} />
                     <Route path="new" element={<Create />} />
                     <Route path="edit/:id" element={<EditCompany />} />
+                  </Route>
+
+                  <Route>
+                    <Route path="/tasks" element={<TaskList />} />
                   </Route>
                 </Route>
               </Routes>
