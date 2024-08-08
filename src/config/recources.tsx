@@ -1,4 +1,4 @@
-import { CompassFilled, DashOutlined, ProjectOutlined, ShopFilled, ShopOutlined, SpotifyOutlined, ToolOutlined } from "@ant-design/icons";
+import { CompassFilled, DashOutlined, ProjectFilled, ProjectOutlined, ShopFilled, ShopOutlined, SpotifyOutlined, ToolOutlined } from "@ant-design/icons";
 import { IResourceItem } from "@refinedev/core";
 import { List } from "antd";
 
@@ -30,6 +30,16 @@ export const resources : IResourceItem[]=[
         meta:{
             label:'Tasks',
             icon: <ProjectOutlined/>
+        }
+    },
+    {
+        name:'tasks',
+        list:'./tasks',
+        create:'/tasks/new',
+        edit:'/tasks/edit/:id',
+        meta:{
+            label:'Tasks',
+            icon: <ProjectFilled/>
         }
     }
 ]

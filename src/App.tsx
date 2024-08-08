@@ -22,7 +22,7 @@ import { App as AntdApp, Layout } from "antd";
 import { createClient } from "graphql-ws";
 import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
 import { authProvider } from "./providers";
-import { Home, ForgotPassword, Login, Register } from "./pages";
+import { Home, ForgotPassword, Login, Register , CompanyList} from "./pages";
 import LayoutProvider from "./Components/layout";
 import { resources } from "./config/recources";
 
@@ -65,6 +65,7 @@ function App() {
                   }
                 >
                   <Route index element={<Home />} />
+                  <Route path="/companies" element={<CompanyList/>} />
                 </Route>
               </Routes>
 
