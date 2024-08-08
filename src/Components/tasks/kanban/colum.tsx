@@ -1,5 +1,5 @@
 import { Text } from "@/Components/text";
-import { PlusCircleOutlined } from "@ant-design/icons";
+import { PlusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 import { useDroppable } from "@dnd-kit/core";
 
 import { Badge, Button, Space } from "antd";
@@ -8,6 +8,7 @@ import { Children } from "react";
 export const KanbanColum = ({ children }: React.PropsWithChildren) => {
   const { isOver, setNodeRef, active } = useDroppable({
     id: "",
+    data: "",
   });
 
   const description = "Description";
@@ -29,39 +30,40 @@ export const KanbanColum = ({ children }: React.PropsWithChildren) => {
               style={{
                 textTransform: "uppercase",
                 whiteSpace: "nowrap",
+                backgroundColor: "rgba(0,0,0,0.1)",
               }}
             >
-              {" "}
               {title}
             </Text>
             {!!count && <Badge count={count} color="pink" />}
           </Space>
           <Button
             shape="circle"
-            icon={<PlusCircleOutlined />}
+            icon={<PlusOutlined />}
             onClick={onAddClickHandler}
           />
         </Space>
         {description}
+      </div>
+
+      <div
+        style={{
+          flex: "1",
+          overflowY: active ? "unset" : "scroll",
+          border: "24px dashed transparent",
+          borderColor: isOver ? "#000040" : "transparent",
+          borderRadius: "8px",
+        }}
+      >
         <div
           style={{
-            flex: 1,
-            overflowY: active ? "unset" : "scroll",
-            border: "2px dashed transparent",
-            borderBlock: isOver ? "#000040" : "transparent",
-            borderRadius: "4px",
+            marginTop: "12px",
+            display: "flex",
+            flexDirection: "column",
+            gap: "8px",
           }}
         >
-          <div
-            style={{
-              marginTop: "12px",
-              display: "flex",
-              flexDirection: "column",
-              gap: "8px",
-            }}
-          >
-            {children}
-          </div>
+          {children}
         </div>
       </div>
     </div>
