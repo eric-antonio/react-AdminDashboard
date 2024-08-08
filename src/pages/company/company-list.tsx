@@ -21,12 +21,12 @@ export const CompanyList = () => {
   const go = useGo();
   const { tableProps, filters } = useTable({
     resource: "companies",
-    onSearch: (value) => {
+    onSearch: (value: string) => {
       return [
         {
           field: "name",
           operator: "contains",
-          value: values.name,
+          value: value,
         },
       ];
     },
