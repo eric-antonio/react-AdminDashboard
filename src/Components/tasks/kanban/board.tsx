@@ -6,13 +6,13 @@ export const KanbanBoardContainer = ({ children }: React.PropsWithChildren) => {
     <div
       style={{
         width: " calc(100% + 64px)",
-        height: "calc()100vh - 64px",
+        height: "calc(100vh - 64px)",
         display: "flex",
         justifyContent: "column",
         margin: "-32px",
       }}
     >
-      {" "}
+   
       <div
         style={{
           width: "100%",
