@@ -1,9 +1,8 @@
 import { Text } from "@/Components/text";
-import {PlusOutlined } from "@ant-design/icons";
+import { PlusOutlined } from "@ant-design/icons";
 import { useDroppable, UseDroppableArguments } from "@dnd-kit/core";
 
 import { Badge, Button, Space } from "antd";
-
 
 type Props = {
   id: string;
@@ -47,7 +46,6 @@ export const KanbanColum = ({
               style={{
                 textTransform: "uppercase",
                 whiteSpace: "nowrap",
-                backgroundColor: "rgba(0,0,0,0.1)",
               }}
             >
               {title}
@@ -68,8 +66,8 @@ export const KanbanColum = ({
           flex: "1",
           overflowY: active ? "unset" : "scroll",
           border: "24px dashed transparent",
-          borderColor: isOver ? "#000040" : "transparent",
-          borderRadius: "8px",
+          borderColor: isOver ? "#000070" : "transparent",
+          borderRadius: "4px",
         }}
       >
         <div
