@@ -15,7 +15,7 @@ export const KanbanItem = ({
 }: React.PropsWithChildren<Props>) => {
   const { attributes, listeners, setNodeRef, active } = useDraggable({
     id: "1",
-    data: "",
+    data: "data",
   });
   return (
     <div style={{ position: "relative" }}>
@@ -39,7 +39,9 @@ export const KanbanItem = ({
                 boxShadow: "rgba(149,157,165,0.2)0px 8px 24px",
                 cursor: "grabbing",
               }}
-            ></div>
+            >
+              {children}
+            </div>
           </DragOverlay>
         )}
         {children}
