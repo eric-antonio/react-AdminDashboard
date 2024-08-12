@@ -20,7 +20,7 @@ export const KanbanColum = ({
   description,
   count,
   data,
-  onAddClick,
+  onAddClick
 }: React.PropsWithChildren<Props>) => {
   const { isOver, setNodeRef, active } = useDroppable({
     id,
