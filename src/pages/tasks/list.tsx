@@ -1,14 +1,16 @@
+import { KanbanBoardContainer } from "@/Components/tasks/kanban/board";
+import { KanbanBoard } from "@/Components/tasks/kanban/board";
+import { KanbanColumn } from "@/Components/tasks/kanban/column";
+import KanbanItem from "@/Components/tasks/kanban/item";
 import {
-  KanbanBoard,
-  KanbanBoardContainer,
-} from "@/Components/tasks/kanban/board";
-import { KanbanColum } from "@/Components/tasks/kanban/colum";
-import { KanbanItem } from "@/Components/tasks/kanban/item";
-import { TASK_STAGES_SELECT_QUERY, TASKS_QUERY } from "@/graphql/queries";
-import { Task, TaskStage } from "@/graphql/schema.types";
+  TASK_STAGES_QUERY,
+  TASK_STAGES_SELECT_QUERY,
+  TASKS_QUERY,
+} from "@/graphql/queries";
+import { TaskStage } from "@/graphql/schema.types";
 import { TasksQuery } from "@/graphql/types";
 import { useList } from "@refinedev/core";
-import { GetFields, GetFieldsFromList } from "@refinedev/nestjs-query";
+import { GetFieldsFromList } from "@refinedev/nestjs-query";
 import React from "react";
 
 const TaskList = () => {
@@ -18,7 +20,7 @@ const TaskList = () => {
       {
         field: "title",
         operator: "in",
-        value: ["TOD", "IN PROGRESS", "IM REVIEW", "DONE"],
+        value: ["TODO", "IN PROGRESS", "IM REVIEW", "DONE"],
       },
     ],
 
@@ -29,7 +31,7 @@ const TaskList = () => {
       },
     ],
     meta: {
-      gqlQuery: TASK_STAGES_SELECT_QUERY,
+      gqlQuery: TASK_STAGES_QUERY,
     },
   });
 
@@ -57,22 +59,20 @@ const TaskList = () => {
   const tasksStage = React.useMemo(() => {
     if (!stages?.data || !tasks?.data) {
       return {
-        unsignedStage: [],
+        unnasignedStage: [],
         stages: [],
       };
     }
 
-    const unsignedStage = tasks.data.filter((task) => !task.stageId === null);
+    const unnasignedStage = tasks.data.filter((task) => !task.stageId === null);
     const grouped: TaskStage[] = stages.data.map((stage) => ({
       ...stage,
-      tasks: tasks.data.filter(
-        (task) => task.stageId?.toString() === stage.id
-      ),
+      tasks: tasks.data.filter((task) => task.stageId?.toString() === stage.id),
     }));
 
     return {
-      unsignedStage,
-      stages: grouped,
+      unnasignedStage,
+      columns: grouped,
     };
   }, [stages, tasks]);
 
@@ -81,23 +81,22 @@ const TaskList = () => {
     <>
       <KanbanBoardContainer>
         <KanbanBoard>
-          <KanbanColum
-            id="unsigned"
+          <KanbanColumn
+            id="unnasigned"
             title={"unsigned"}
-            count={tasksStage.unsignedStage.length || 0}
-            onAddClick={() => handleAddCard({ stageId: "unsigned" })}
-            data={undefined}
+            count={tasksStage.unnasignedStage.length || 0}
+            onAddClick={() => handleAddCard({ stageId: "unnasigned" })}
           >
-            {tasksStage.unsignedStage.map((task) => (
+            {tasksStage.unnasignedStage.map((task) => (
               <KanbanItem
                 key={task.id}
                 id={task.id}
-                data={{ ...tasks, stageId: "unsigbed" }}
+                data={{ ...task, stageId: "unnasigned" }}
               >
                 {task.title}
               </KanbanItem>
             ))}
-          </KanbanColum>
+          </KanbanColumn>
         </KanbanBoard>
       </KanbanBoardContainer>
     </>
