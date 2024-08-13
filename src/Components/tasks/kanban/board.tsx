@@ -1,25 +1,23 @@
 import { DndContext } from "@dnd-kit/core";
-import React, { ReactNode } from "react";
 
 export const KanbanBoardContainer = ({ children }: React.PropsWithChildren) => {
   return (
     <div
       style={{
-        width: " calc(100% + 64px)",
+        width: "calc(100% + 94px)",
         height: "calc(100vh - 64px)",
         display: "flex",
         justifyContent: "column",
         margin: "-32px",
       }}
     >
-   
       <div
         style={{
-          width: "100%",
+          width: "100vh",
           height: "100%",
           display: "flex",
           padding: "32px",
-          overflow: "scroll",
+          overflowX: "scroll",
         }}
       >
         {children}
@@ -31,5 +29,3 @@ export const KanbanBoardContainer = ({ children }: React.PropsWithChildren) => {
 export const KanbanBoard = ({ children }: React.PropsWithChildren) => {
   return <DndContext>{children}</DndContext>;
 };
-
-
