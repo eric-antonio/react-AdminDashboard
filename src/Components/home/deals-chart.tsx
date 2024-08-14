@@ -61,7 +61,7 @@ const DealsChart = () => {
   return (
     <Card
       headStyle={{ padding: "8px 16px" }}
-      bodyStyle={{ padding: "24px 24px 0 24px" }}
+      // bodyStyle={{ padding: "24px 24px 0 24px" }}
       style={{
         height: "100%",
         alignItems: "center",
