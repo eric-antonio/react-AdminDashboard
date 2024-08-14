@@ -24,7 +24,7 @@ const KanbanItem = ({ children, id, data }: React.PropsWithChildren<Props>) => {
           opacity: active ? (active.id === id ? 1 : 0.5) : 1,
           borderRadius: "8px",
           position: "relative",
-          cursor: "pointer",
+          cursor: "grab",
           padding: "8px",
         }}
       >
@@ -37,11 +37,12 @@ const KanbanItem = ({ children, id, data }: React.PropsWithChildren<Props>) => {
                 cursor: "grabbing",
               }}
             >
-              {children}
+              {/* {children} */}
             </div>
           </DragOverlay>
         )}
-        {children}
+        {children} 
+        <p>jdsf</p>
       </div>
     </div>
   );
